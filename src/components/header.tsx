@@ -11,12 +11,14 @@ const Header = () => {
               <h1 className="text-lg font-bold">UN Women</h1>
             </div>
             <nav className="space-x-6">
-              <a href="#" className="text-gray-600">Home</a>
-              <a href="#" className="text-gray-600">Who We Are</a>
-              <a href="#" className="text-gray-600">Store</a>
-              <a href="#" className="text-gray-600">Mentor</a>
-              <a href="#" className="text-gray-600">Login</a>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Sign Up</button>
+              <a href="/" className="text-gray-600">Home</a>
+              {/* <a href="#" className="text-gray-600">Who We Are</a> */}
+              <a href="/products/shop" className="text-gray-600">Store</a>
+              <a href="/mentors" className="text-gray-600">Mentor</a>
+              <a href="/auth/login" className="text-gray-600">Login</a>
+              <a href="/auth/signup" className="text-gray-600">
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Sign Up</button>
+              </a>
             </nav>
           </header>
         </div>
