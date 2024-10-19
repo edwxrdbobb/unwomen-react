@@ -1,16 +1,24 @@
-import Hero from '@/components/hero'
 import Image from 'next/image'
 import prod_img from '@/images/macbook.jpg'
+import ImageSlider from '@/components/ImageSlider'
+import CategoryHorizontal from '@/components/categoryHorizontal';
+
 export default function HomeScreen() {
+
+  const images = [
+    "https://cached.imagescaler.hbpl.co.uk/resize/scaleHeight/815/cached.offlinehbpl.hbpl.co.uk/news/OMC/5women.jpg",
+    "https://africaexpo2020dubai.au.int/sites/default/files/styles/default/public/images/2021-03/african-woman.jpg?itok=84ORFocB",
+    "https://i2.wp.com/commonwealthbc.com/wp-content/uploads/2021/03/iStock-1151111572.jpg?fit=1360%2C770",
+  ];
+
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navbar */}
-
-      {/* Banner Section */}
-        <Hero />
+      {/* Slider Banner Section */}
+        <ImageSlider images={images} />
 
       {/* Category Section */}
-        
+        <CategoryHorizontal />
 
       {/* Product Listing Section */}
       <section className="py-8 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
