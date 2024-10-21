@@ -1,14 +1,14 @@
 import ImageSlider from '@/components/ImageSlider'
 import CategoryHorizontal from '@/components/categoryHorizontal';
-import Footer from '@/components/footer';
 import ProductCard from '@/components/productCards';
+import bannerOne from '@/images/banner2-unwomen.jpg'
+import bannerTwo from '@/images/unwomen-banner1.jpg'
 
 export default function HomeScreen() {
 
   const images = [
-    "https://cached.imagescaler.hbpl.co.uk/resize/scaleHeight/815/cached.offlinehbpl.hbpl.co.uk/news/OMC/5women.jpg",
-    "https://africaexpo2020dubai.au.int/sites/default/files/styles/default/public/images/2021-03/african-woman.jpg?itok=84ORFocB",
-    "https://i2.wp.com/commonwealthbc.com/wp-content/uploads/2021/03/iStock-1151111572.jpg?fit=1360%2C770",
+    bannerOne,
+    bannerTwo
   ];
 
 
@@ -24,9 +24,6 @@ export default function HomeScreen() {
       <section className="">
         <ProductCard />
       </section>
-
-      {/* Footer Section */}
-      <Footer />
     </div>
   )
 }

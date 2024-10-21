@@ -1,32 +1,34 @@
 import Sidebar from "@/components/filterSideBar";
-import ProductCard from "@/components/productCard";
-import {Product} from '@/types/products';
+import ProductCard from "@/components/productCards";
+import ProductCardCategory from "@/components/ProductCardsCategory";
 
-const products: Product[] = [
-  {
-    image: '/macbook-pro.jpg',
-    name: 'MacBook Pro 2022 M2',
-    description: 'Latest M2 MacBook with sleek design.',
-    price: 23000, // Change this to a number
-  },
-  {
-    image: '/macbook-pro-2019.jpg',
-    name: 'MacBook Pro 2019 13"',
-    description: 'MacBook with 13" Retina display.',
-    price: 18000, // Change this to a number
-  },
-  // Add more product data as needed
-];
+interface ShopProps {
+  action: string; // Add action prop if needed
+  category: string | string[]; // Ensure category can be string or string[]
+}
 
-export default function Shop() {
+export default function Shop({ action, category }: ShopProps) {
+  const filterOptions = (action: string) => { // Explicitly define the type of action
+    switch (action) {
+      case 'category':
+        return <ProductCardCategory category={category} />;
+    
+      default:
+        return <ProductCard />;
+    }
+  }
+
+  console.log(`Category:  ${category}`);
+  
   return (
     <div>
       <div className="flex mt-8 px-8">
-        <Sidebar />
-        <div className="flex-1 grid grid-cols-3 gap-6">
-          {products.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
+        <Sidebar currentCategory={category} />
+        <div className="ml-4">
+          Hey how rae you
+          {
+              filterOptions(action)
+          }
         </div>
       </div>
     </div>
