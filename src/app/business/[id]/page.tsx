@@ -2,7 +2,7 @@
 
 import BusinessDetails from '@/components/businessDetails';
 import BusinessImages from '@/components/businessImages';
-import { useRouter, useParams } from 'next/navigation'; // Import useParams hook
+import { useParams } from 'next/navigation'; // Import useParams hook
 import { useEffect, useState } from 'react';
 
 interface Business {
