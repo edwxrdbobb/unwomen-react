@@ -1,12 +1,18 @@
 // components/Sidebar.js
 import React from 'react';
 import CategoryVertical from './categoryVertical';
+import BusinessCategoryVertical from './businessCategoryVertical';
 
 export default function Sidebar({currentCategory}) {
   return (
-    <div className="w-64 p-4 bg-white ">
-      <div className="category-filter shadow-md rounded-md">
-        <h2 className="text-xl font-bold mb-4">By Category</h2>
+    <div className=" p-2 bg-white text-black">
+      <div className="w-full category-filter shadow-md rounded-md mt-2">
+        {/* <h2 className="text-xl font-bold mb-4">By Category</h2> */}
+        <BusinessCategoryVertical currentCategory={currentCategory} />
+      </div>
+
+      <div className="w-full category-filter shadow-md rounded-md mt-2">
+        {/* <h2 className="text-xl font-bold mb-4">By Category</h2> */}
         <CategoryVertical currentCategory={currentCategory} />
       </div>
 

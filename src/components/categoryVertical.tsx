@@ -53,25 +53,25 @@ const CategoryVertical: React.FC<CategoryVerticalProps> = ({ currentCategory }) 
   const categoryIconSelector = (category: string) => { // Changed parameter type to string
     switch (category) {
       case 'fashion':
-        return <Image width={45} height={45} className='rounded-full' src={fashionSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={fashionSVG} alt={category} />;
       case 'Others':
-        return <Image width={45} height={45} className='rounded-full' src={questionSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={questionSVG} alt={category} />;
       case 'Beauty':
-        return <Image width={45} height={45} className='rounded-full' src={beautySVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={beautySVG} alt={category} />;
       case 'Apparel':
-        return <Image width={45} height={45} className='rounded-full' src={apparelSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={apparelSVG} alt={category} />;
       case 'Food':
-        return <Image width={45} height={45} className='rounded-full' src={foodSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={foodSVG} alt={category} />;
       case 'Stationary':
-        return <Image width={45} height={45} className='rounded-full' src={stationarySVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={stationarySVG} alt={category} />;
       case 'Services':
-        return <Image width={45} height={45} className='rounded-full' src={serviceSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={serviceSVG} alt={category} />;
       case 'Household':
-        return <Image width={45} height={45} className='rounded-full' src={householdSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={householdSVG} alt={category} />;
       case 'Electronics':
-        return <Image width={45} height={45} className='rounded-full' src={electronicSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={electronicSVG} alt={category} />;
       case 'Select Category':
-        return <Image width={45} height={45} className='rounded-full' src={questionSVG} alt={category} />;
+        return <Image width={35} height={35} className='rounded-full' src={questionSVG} alt={category} />;
       default:
         return null;
     }
@@ -80,15 +80,17 @@ const CategoryVertical: React.FC<CategoryVerticalProps> = ({ currentCategory }) 
   return (
     <div>
       <section className="py-8 px-4">
-        <h3 className="text-xl text-black mb-6">Search by category</h3>
+        <h3 className="text-md text-black mb-6 font-bold">Search by category</h3>
         <div className="flex items-center">
+          
           <div ref={scrollRef} className="flex flex-col overflow-y-auto whitespace-nowrap">
             {categories.map((category, key) => (
               <Link key={key} href={`/products/shop/category/${category.category}`} passHref>
                 <button
-                  className={`flex flex-col items-center px-4 py-2 ${currentCategory === category.category ? 'bg-blue-500' : 'bg-gray-200'}`} // Change background color based on currentCategory
+                  className={`flex flex-row items-center p-[5px] my-2 w-[200px] h-[50px] rounded-md ${currentCategory === category.category ? 'bg-blue-500 text-white' : 'bg-white'}`} 
+                  style={{border: '1px solid #e5e7eb'}}
                 >
-                  <span className="bg-gray-200 p-2 rounded-full m-2">
+                  <span className="bg-gray-200 rounded-full m-2">
                     {categoryIconSelector(category.category)}
                   </span>
                   <span className="text-black text-xs">{category.category}</span>

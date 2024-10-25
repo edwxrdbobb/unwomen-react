@@ -10,6 +10,7 @@ import serviceSVG from '@/images/SVGs/briefcase-svg.svg';
 import householdSVG from '@/images/SVGs/bed-svg.svg';
 import electronicSVG from '@/images/SVGs/laptop-svg.svg';
 import questionSVG from '@/images/SVGs/question-circle-svg.svg';
+import Link from 'next/link';
 
 interface Category {
   category: string; // Updated to match the new data structure
@@ -92,12 +93,14 @@ const CategoryHorizontal = () => {
           <button onClick={scrollLeft} className="mr-2">Left</button> {/* Left button */}
           <div ref={scrollRef} className="flex overflow-x-hidden whitespace-nowrap"> {/* Scroll container */}
             {categories.map((category, key) => (
+              <Link key={key} href={`/products/shop/category/${category.category}`} passHref>
               <button key={key} className="flex flex-col items-center px-4 py-2">
                 <span className="bg-gray-200 p-4 rounded-full m-2">
                   {categoryIconSelector(category.category)} 
                 </span>
                 <span className="text-black text-xs">{category.category}</span>
               </button>
+              </Link>
             ))}
           </div>
           <button onClick={scrollRight} className="ml-2">Right</button> {/* Right button */}

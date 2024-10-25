@@ -4,7 +4,7 @@ const Footer = () =>{
 
     return(
         <div>
-            <footer className="bg-blue-900 text-white p-8 mt-8">
+            <footer className="bg-blue-500 text-white p-8 mt-8" >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* About UN Women */}
           <div>

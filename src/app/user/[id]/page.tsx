@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import mac from "@/images/macbook.jpg";
-import ProductCardIndividual from "@/components/ProductCardIndividual"; // Import the ProductCardIndividual component
+import ProductCardIndividual from "@/components/ProductCardIndividual"; 
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -10,7 +10,7 @@ const Profile = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            const userInfo = JSON.parse(atob(token.split('.')[1])); // Decode the payload
+            const userInfo = JSON.parse(atob(token.split('.')[1])); 
             setUser(userInfo);
         }
     }, []);
@@ -44,7 +44,7 @@ const Profile = () => {
                 </ul>
                 <div className="mt-6">
                     {user ? (
-                        <ProductCardIndividual userId={user.id} /> // Pass the user ID to ProductCardIndividual
+                        <ProductCardIndividual userId={user.id} /> 
                     ) : (
                         <p className="text-gray-600 text-lg">No Products Available</p>
                     )}

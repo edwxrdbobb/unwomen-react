@@ -42,6 +42,7 @@ export default function Register() {
     formDataToSend.append('name', formData.name);
     formDataToSend.append('email', formData.email);
     formDataToSend.append('password', formData.password);
+    formDataToSend.append('confPassword', formData.confPassword);
     formDataToSend.append('role', formData.role);
     formDataToSend.append('phoneNo', formData.phoneNo);
     formDataToSend.append('homeAddress', formData.homeAddress);
@@ -53,11 +54,11 @@ export default function Register() {
         body: formDataToSend,
       });
 
-      // Check if the response is OK
+      
       if (!response.ok) {
-        const errorText = await response.text(); // Get the response text
-        console.error('Error response:', errorText); // Log the error response
-        alert(`Error: ${errorText}`); // Alert the user with the error message
+        const errorText = await response.text(); 
+        console.error('Error response:', errorText); 
+        alert(`Error: ${errorText}`); 
         return;
       }
 

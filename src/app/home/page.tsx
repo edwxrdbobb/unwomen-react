@@ -1,4 +1,5 @@
 import ImageSlider from '@/components/ImageSlider'
+import BusinessCategory from '@/components/businessCategorys';
 import CategoryHorizontal from '@/components/categoryHorizontal';
 import ProductCard from '@/components/productCards';
 import bannerOne from '@/images/banner2-unwomen.jpg'
@@ -16,6 +17,9 @@ export default function HomeScreen() {
     <div className="min-h-screen bg-gray-50 my-4">
       {/* Slider Banner Section */}
         <ImageSlider images={images} />
+
+      {/* Business Category Section */}
+        <BusinessCategory />
 
       {/* Category Section */}
         <CategoryHorizontal />

@@ -15,9 +15,10 @@ interface Product {
   }>;
   currentPrice: string;
   category: string;
+  size: 3;
 }
 
-const ProductCard = () => {
+const ProductCard = ({size}) => {
   const [products, setProducts] = useState<Product[]>([]); 
   const [currentPage, setCurrentPage] = useState(1); 
   const productsPerPage = 24; 
@@ -63,7 +64,14 @@ const ProductCard = () => {
 
   return (
     <div>
-      <section className="py-8 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+         <section 
+      className={
+        size === 3 ? 
+        "py-8 px-4 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        :
+        "py-8 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      }
+      >
         {currentProducts.map((product) => (
         <Link key={product.id} href={`/products/${product.uuid}`} passHref>
           <div className="bg-white rounded-lg shadow-lg p-4" key={product.id}>
