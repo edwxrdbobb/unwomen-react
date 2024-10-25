@@ -2,8 +2,8 @@
 
 import ProductDetails from '@/components/productDetails';
 import ProductImages from '@/components/productImages';
-import SimilarProducts from '@/components/similarProducts';
-import { useRouter, useParams } from 'next/navigation'; // Import useParams hook
+// import SimilarProducts from '@/components/similarProducts';
+import {  useParams } from 'next/navigation'; // Import useParams hook
 import { useEffect, useState } from 'react';
 
 interface Product {

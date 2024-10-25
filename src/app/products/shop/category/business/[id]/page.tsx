@@ -1,20 +1,20 @@
 "use client";
 
-import { useRouter, useParams } from 'next/navigation'; // Import useParams hook
-import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation'; // Import useParams hook
+// import { useEffect, useState } from 'react';
 import Shop from "../../../page"
 
 
 const BusinessCategoryProducts: React.FC = (): JSX.Element =>{
 
 
-interface Category {
-  category: string;
-}
+// interface Category {
+//   category: string;
+// }
 
-interface ShopProps {
-  category: string | string[]; 
-}
+// interface ShopProps {
+//   category: string | string[]; 
+// }
 
 const params = useParams(); 
 const category = params.id; // Ensure you are accessing the correct parameter
@@ -27,7 +27,7 @@ if (!category) {
 }
 return(
     <div>
-        <Shop action="business" category={category} /> {/* Pass action if needed */}
+        <Shop size={4} action="business" category={category} /> {/* Pass action if needed */}
     </div>
 )
 }

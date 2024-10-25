@@ -17,14 +17,18 @@ interface BusinessCategoryVerticalProps {
 
 const BusinessCategoryVertical: React.FC<BusinessCategoryVerticalProps> = ({ currentCategory }) => {
     
-    const [categories, setCategories] = useState<Category[]>([
+    const [categories, setCategories] = useState<Category[]>([]);
+
+  const scrollRef = useRef<HTMLDivElement>(null); // Create a ref for the scroll container
+
+    useEffect(() => {
+      setCategories([
         { category: 'SME' },
         { category: 'MACRO' },
         { category: 'MICRO' },
         { category: 'SOHO' }
-      ]);
-
-  const scrollRef = useRef<HTMLDivElement>(null); // Create a ref for the scroll container
+      ])
+    })
 
 //   useEffect(() => {
 //     const fetchCategories = async () => {
