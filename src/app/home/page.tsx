@@ -6,23 +6,21 @@ import bannerOne from '@/images/banner2-unwomen.jpg'
 import bannerTwo from '@/images/unwomen-banner1.jpg'
 
 export default function HomeScreen() {
-
   const images = [
     bannerOne,
     bannerTwo
   ];
 
-
   return (
     <div className="min-h-screen bg-gray-50 my-4">
       {/* Slider Banner Section */}
-        <ImageSlider images={images} />
+      <ImageSlider images={images} />
 
       {/* Business Category Section */}
-        <BusinessCategory />
+      <BusinessCategory />
 
       {/* Category Section */}
-        <CategoryHorizontal />
+      <CategoryHorizontal />
 
       {/* Product Listing Section */}
       <section className="">

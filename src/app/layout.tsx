@@ -3,7 +3,8 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { AuthProvider } from "@/context/AuthContext";
-import "@/styles/main.css";
+import '@/styles/main.css';
+import Favicon from "@/components/Favicon";
 
 export default function RootLayout({
   children,
@@ -12,11 +13,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <Favicon />
+      </head>
+      <body className="min-h-screen">
         <AuthProvider>
-        <Header />
+          <Header />
           {children}
-        <Footer />
+          <Footer />
         </AuthProvider>
       </body>
     </html>

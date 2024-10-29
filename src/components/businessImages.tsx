@@ -11,11 +11,11 @@ const BusinessImages: React.FC<BusinessImagesProps> = ({ logo, images = [] }) =>
   return (
     <div className="flex flex-col items-center">
       {/* Business Logo */}
-      <div className="mb-4">
+      <div className="mb-4 h-[350px] w-full">
         <img
           src={logo}
           alt="Business Logo"
-          className="w-full h-auto rounded-lg shadow-lg"
+          className="w-full h-full rounded-lg shadow-lg object-cover"
         />
       </div>
 

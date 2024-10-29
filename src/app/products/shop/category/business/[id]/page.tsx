@@ -27,7 +27,7 @@ if (!category) {
 }
 return(
     <div>
-        <Shop size={4} action="business" category={category} /> {/* Pass action if needed */}
+        <Shop size={2} action="business" category={category} /> {/* Pass action if needed */}
     </div>
 )
 }

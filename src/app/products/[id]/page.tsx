@@ -2,9 +2,12 @@
 
 import ProductDetails from '@/components/productDetails';
 import ProductImages from '@/components/productImages';
+import ProductStoreOwner from '@/components/productStoreOwner';
 // import SimilarProducts from '@/components/similarProducts';
 import {  useParams } from 'next/navigation'; // Import useParams hook
 import { useEffect, useState } from 'react';
+import Loader from '@/components/Loader';
+// import { toast } from 'react-hot-toast';
 
 interface Product {
   id: number;
@@ -19,7 +22,28 @@ interface Product {
     productImageOne: string;
     productImageTwo: string;
   }>;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+    url: string;
+  };
   // Add other properties as necessary
+}
+
+interface CartItem {
+  id: number;
+  productName: string;
+  price: number;
+  image: string;
+  quantity: number;
+}
+
+interface WishlistItem {
+  id: number;
+  productName: string;
+  price: number;
+  image: string;
 }
 
 // Explicitly declare the return type of the component as JSX.Element
@@ -28,17 +52,31 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
   const params = useParams(); // Use useParams() to access the dynamic route
   const { id } = params; // Destructure the id from params
   const [product, setProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInCart, setIsInCart] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   useEffect(() => {
     if (id) {
       // Fetch product data by ID
       const fetchProduct = async () => {
+        setIsLoading(true);
         try {
           const response = await fetch(`https://unwomenmarketsquare.online/products/${id}`);
           const data = await response.json();
           setProduct(data);
+          
+          // Check if product is in cart
+          const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+          setIsInCart(cartItems.some((item: CartItem) => item.id === data.id));
+          
+          // Check if product is in wishlist
+          const wishlistItems = JSON.parse(localStorage.getItem('wishlist') || '[]');
+          setIsInWishlist(wishlistItems.some((item: WishlistItem) => item.id === data.id));
         } catch (error) {
           console.error('Error fetching product:', error);
+        } finally {
+          setIsLoading(false);
         }
       };
 
@@ -46,11 +84,15 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
     }
   }, [id]);
 
-  if (!product) {
-    return <p>Loading product...</p>;
+
+  if (isLoading) {
+    return <Loader />;
   }
 
-    
+  if (!product) {
+    return <p>Product not found.</p>;
+  }
+
   return (
     <div>
       <div className="container mx-auto mt-8">
@@ -66,40 +108,30 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
               name={product.productName}
               price={product.currentPrice}
               description={product.description}
-              quantity={25}
+              productCategory={product.category}
               productLocation={product.productLocation}
             />
 
-            {/* Icons: Chat, Add to Wishlist, Share */}
-            <div className="flex space-x-4 items-center">
-              <button className="flex items-center text-gray-600">
-                <i className="fas fa-comment text-xl"></i>
-                <span className="ml-2">Chat</span>
-              </button>
-              <button className="flex items-center text-gray-600">
-                <i className="fas fa-heart text-xl"></i>
-                <span className="ml-2">Add to Wishlist</span>
-              </button>
-              <button className="flex items-center text-gray-600">
-                <i className="fas fa-share text-xl"></i>
-                <span className="ml-2">Share</span>
-              </button>
+            {/* Add to Cart and Wishlist Buttons */}
+            <div className="flex space-x-4">
+              {/* <button
+                onClick={addToCart}
+                className={`px-6 py-2 rounded-lg transition-colors duration-300 ${
+                  isInCart 
+                    ? 'bg-green-500 text-white hover:bg-green-600' 
+                    : 'bg-yellow-400 text-white hover:bg-yellow-500'
+                }`}
+              >
+                {isInCart ? 'In Cart' : 'Add to Cart'}
+              </button> */}
             </div>
 
-            {/* Store and User Information */}
-            <div className="flex items-center p-4 border rounded-lg">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-gray-200 rounded-full"></div> {/* Placeholder for profile image */}
-              </div>
-              <div className="ml-4">
-                <h4 className="font-semibold">Kadric Gadget</h4>
-                <p className="text-gray-500">Store Location: Lumley, Regent Road</p>
-              </div>
-              <div className="ml-auto">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg">Follow</button>
-                <button className="ml-2 border px-4 py-2 rounded-lg">Visit Store</button>
-              </div>
-            </div>
+            <ProductStoreOwner
+              storeName={'Store Owner'}
+              storeLocation={'freetown'}
+              storeId={1}
+              profileImage={'userimg.png'}
+            />
           </div>
         </div>
 

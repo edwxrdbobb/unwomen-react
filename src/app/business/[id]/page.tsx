@@ -81,12 +81,6 @@ const BusinessDetailsPage: React.FC = (): JSX.Element => {
           </div>
         </div>
 
-        <div className="mt-12 text-black">
-          <h2 className="text-2xl font-semibold">Biography</h2>
-          <p className="mt-4">
-            {business.businessBiography}
-          </p>
-        </div>
       </div>
     </div>
   );

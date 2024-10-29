@@ -10,15 +10,12 @@ interface BusinessDetailsProps {
 
 const BusinessDetails: React.FC<BusinessDetailsProps> = ({ name, email, phone, address, biography }) => {
   return (
-    <div className="w-full lg:w-2/3 space-y-6">
+    <div className="w-full lg:w-2/3 space-y-4">
       <h1 className="text-3xl font-semibold text-black">{name}</h1>
-      <p className="text-lg font-bold text-yellow-500">Contact: {email}</p>
-      <p className="text-lg font-bold text-yellow-500">Phone: {phone}</p>
-      <p className="text-lg font-bold text-yellow-500">Address: {address}</p>
-      <div className="mt-4">
-        <h3 className="font-semibold text-xl">Business Biography</h3>
-        <p className='text-black'>{biography}</p>
-      </div>
+      <p className="text-md text-yellow-300">Contact: <span className="font-bold text-gray-700"> {email}</span></p>
+      <p className="text-md text-yellow-300">Phone: <span className="font-bold text-gray-700"> {phone}</span></p>
+      <p className="text-md text-yellow-300">Address: <span className="font-bold text-gray-700"> {address}</span></p>
+      <p className="text-md text-gray-600 truncate">{biography}</p>
     </div>
   );
 };

@@ -44,7 +44,9 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
         {productImages.map((img, idx) => (
           img === 'null' ? 
             null : 
-            <img key={idx} src={img} alt={`Thumbnail ${idx} url ${img}`} onClick={() => setCurrentImage(img)} className="cursor-pointer w-20 h-20 rounded-lg" />
+            <img key={idx} src={img} alt={`Thumbnail ${idx} url ${img}`} onClick={() => setCurrentImage(img)} className={`cursor-pointer w-20 h-20 rounded-lg ${
+              img === currentImage? 'border border-4 border-blue-400' : ''}
+              `} />
         ))}
       </div>
     </div>

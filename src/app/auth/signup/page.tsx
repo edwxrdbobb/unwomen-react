@@ -1,8 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import { Toaster, toast } from 'react-hot-toast';
+import Link from "next/link";
 
 // pages/register.jsx
 export default function Register() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,10 +16,10 @@ export default function Register() {
     role: '',
     phoneNo: '',
     homeAddress: '',
-    file: null,
+    file: null as File | null,
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -22,31 +27,31 @@ export default function Register() {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      file: e.target.files[0],
-    }));
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFormData((prevData) => ({
+        ...prevData,
+        file: e.target.files![0],
+      }));
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    // Validate passwords match
     if (formData.password !== formData.confPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
+      setIsLoading(false);
       return;
     }
 
     const formDataToSend = new FormData();
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('password', formData.password);
-    formDataToSend.append('confPassword', formData.confPassword);
-    formDataToSend.append('role', formData.role);
-    formDataToSend.append('phoneNo', formData.phoneNo);
-    formDataToSend.append('homeAddress', formData.homeAddress);
-    formDataToSend.append('file', formData.file);
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null) {
+        formDataToSend.append(key, value);
+      }
+    });
 
     try {
       const response = await fetch('https://unwomenmarketsquare.online/users', {
@@ -54,29 +59,30 @@ export default function Register() {
         body: formDataToSend,
       });
 
-      
       if (!response.ok) {
-        const errorText = await response.text(); 
-        console.error('Error response:', errorText); 
-        alert(`Error: ${errorText}`); 
-        return;
+        const errorText = await response.text();
+        throw new Error(errorText);
       }
 
-      const data = await response.json(); // Parse the response as JSON
-      alert(data.msg); // Success message
+      const data = await response.json();
+      toast.success(data.msg || 'Registration successful!');
+      router.push('/auth/login'); // Redirect to login page
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred while signing up.');
+      toast.error('An error occurred while signing up. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-6 rounded-md shadow-md border border-gray-300">
-        <h2 className="text-center text-2xl font-bold mb-4 text-black">Register</h2>
+    <div className="min-h-screen flex justify-center items-center bg-white my-14">
+      <Toaster position="top-center" reverseOrder={false} />
+      <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md border border-yellow-300">
+        <h2 className="text-center text-2xl font-bold mb-4 text-blue-500">Register</h2>
         <p className="text-center mb-4 text-black">Create An Account With Us Today For Free</p>
         <div className="flex justify-center mb-4">
-          <div className="h-24 w-24 bg-gray-200 rounded-full flex items-center justify-center">
+          <div className="h-32 w-32 bg-gray-200 rounded-full flex items-center justify-center">
             <input
               type="file"
               onChange={handleFileChange}
@@ -166,12 +172,18 @@ export default function Register() {
               required
             />
           </div>
-          <button type="submit" className="w-full bg-yellow-400 p-2 text-white font-bold rounded">
-            Submit
+          <button 
+            type="submit" 
+            className="w-full bg-yellow-200 p-2 text-black font-bold rounded"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Submitting...' : 'Submit'}
           </button>
-          <p className="text-center text-sm mt-4 text-blue-500 cursor-pointer">
-            Forgot Password
-          </p>
+          <Link href={`/auth/login`} >
+                  <p className="text-center text-sm mt-4 text-blue-600 cursor-pointer">
+                      Already have an account? <b>Login</b>
+                  </p>
+            </Link>
         </form>
       </div>
     </div>
