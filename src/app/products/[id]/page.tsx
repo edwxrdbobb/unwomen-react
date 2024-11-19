@@ -90,12 +90,16 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
   }
 
   if (!product) {
-    return <p>Product not found.</p>;
+    return (
+      <div className='container mx-auto my-8 min-h-[25rem]'>
+        <p>Product not found.</p>
+      </div>
+    );
   }
 
   return (
     <div>
-      <div className="container mx-auto mt-8">
+      <div className="container mx-auto my-8 min-h-[75vh]">
         <div className="flex flex-wrap lg:flex-nowrap space-x-6">
           {/* Product Images */}
           <div className="w-full lg:w-1/2">
