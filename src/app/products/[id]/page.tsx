@@ -99,7 +99,7 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
 
   return (
     <div>
-      <div className="container mx-auto my-8 min-h-[75vh]">
+      <div className="container px-12 overflow-hidden my-8 min-h-[75vh]">
         <div className="flex flex-wrap lg:flex-nowrap space-x-6">
           {/* Product Images */}
           <div className="w-full lg:w-1/2">

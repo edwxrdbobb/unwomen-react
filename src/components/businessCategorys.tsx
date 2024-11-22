@@ -48,7 +48,7 @@ const BusinessCategory = () => {
     <div>
       <section className="py-8 px-4">
         <h3 className="text-xl text-black mb-6">Search by Business</h3>
-        <div className="flex items-center">
+        <div className="flex items-center justify-center">
           <div ref={scrollRef} className="flex overflow-x-hidden whitespace-nowrap">
             {categories.map((category, index) => (
               <Link 

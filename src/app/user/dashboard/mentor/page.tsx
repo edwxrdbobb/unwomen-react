@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-// import Image from "next/image";
+import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
 const Profile = () => {
@@ -17,20 +17,15 @@ const Profile = () => {
         
     }, [user]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('token')
-        router.push('/auth/login')
-      }
-
     return (
         <div className="flex max-w-6xl mx-auto py-10 px-4">
             <aside className="w-1/4 p-4 border-r">
                 <nav className="space-y-4">
-                    <button className="block w-full text-left p-2 text-gray-700 font-bold">Dashboard</button>
-                    <button className="block w-full text-left p-2 text-gray-500">Wishlist</button>
-                    <button className="block w-full text-left p-2 text-gray-500">Shopping Cart</button>
-                    <button className="block w-full text-left p-2 text-gray-500">Settings</button>
-                    <button className="block w-full text-left p-2 text-red-500 hover:bg-red-50" onClick={handleLogout}>Log-out</button>
+                    <button className="block w-full text-left text-gray-700 font-bold">Dashboard</button>
+                    <button className="block w-full text-left text-gray-500">Wishlist</button>
+                    <button className="block w-full text-left text-gray-500">Shopping Cart</button>
+                    <button className="block w-full text-left text-gray-500">Settings</button>
+                    <button className="block w-full text-left text-gray-500">Log-out</button>
                 </nav>
             </aside>
             <main className="w-3/4 p-4">

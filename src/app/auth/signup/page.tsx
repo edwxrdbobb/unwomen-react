@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from 'next/navigation';
 import { Toaster, toast } from 'react-hot-toast';
 import Link from "next/link";
 
-// pages/register.jsx
 export default function Register() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,20 @@ export default function Register() {
     file: null as File | null,
   });
 
+  const [filePreview, setFilePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (formData.file) {
+      const objectUrl = URL.createObjectURL(formData.file);
+      setFilePreview(objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setFilePreview(null);
+    }
+  }, [formData.file]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -29,11 +43,16 @@ export default function Register() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
       setFormData((prevData) => ({
         ...prevData,
-        file: e.target.files![0],
+        file: file,
       }));
     }
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current?.click();
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -78,19 +97,31 @@ export default function Register() {
   return (
     <div className="min-h-screen flex justify-center items-center bg-white my-14">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md border border-yellow-300">
+      <div className="w-full max-w-lg bg-white p-6 rounded-md shadow-md border border-yellow-100">
         <h2 className="text-center text-2xl font-bold mb-4 text-blue-500">Register</h2>
         <p className="text-center mb-4 text-black">Create An Account With Us Today For Free</p>
         <div className="flex justify-center mb-4">
-          <div className="h-32 w-32 bg-gray-200 rounded-full flex items-center justify-center">
+          <div 
+            className="h-32 w-32 bg-gray-200 rounded-full shadow flex items-center justify-center overflow-hidden relative cursor-pointer"
+            onClick={handleImageClick}
+          >
             <input
               type="file"
               onChange={handleFileChange}
               className="hidden"
               id="file-upload"
+              ref={fileInputRef}
               required
             />
-            <label htmlFor="file-upload" className="text-blue-500 cursor-pointer">Choose Cover</label>
+            {filePreview ? (
+              <img
+                src={filePreview}
+                alt="File Preview"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <p className="text-blue-500">Choose Cover</p>
+            )}
           </div>
         </div>
         <form onSubmit={handleSubmit}>
@@ -125,9 +156,9 @@ export default function Register() {
               required
             >
               <option value="">Choose Role</option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-              {/* Add more roles as needed */}
+              <option value="Customer">Customer</option>
+              <option value="Vendor">Vendors</option>
+              <option value="Mentor">Mentor</option>
             </select>
           </div>
           <div className="mb-4">
@@ -179,13 +210,14 @@ export default function Register() {
           >
             {isLoading ? 'Submitting...' : 'Submit'}
           </button>
-          <Link href={`/auth/login`} >
-                  <p className="text-center text-sm mt-4 text-blue-600 cursor-pointer">
-                      Already have an account? <b>Login</b>
-                  </p>
-            </Link>
+          <Link href={`/auth/login`}>
+            <p className="text-center text-sm mt-4 text-blue-600 cursor-pointer">
+              Already have an account? <b>Login</b>
+            </p>
+          </Link>
         </form>
       </div>
     </div>
   );
 }
+

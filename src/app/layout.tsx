@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { AuthProvider } from "@/context/AuthContext";
@@ -26,3 +25,4 @@ export default function RootLayout({
     </html>
   );
 }
+

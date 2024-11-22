@@ -28,7 +28,9 @@ export default function Login() {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 toast.success('Login successful!');
-                router.push('/'); 
+                setTimeout(() => {
+                    router.push('/'); 
+                }, 2500);
             } else {
                 toast.error(data.msg || 'Login failed. Please try again.');
             }
