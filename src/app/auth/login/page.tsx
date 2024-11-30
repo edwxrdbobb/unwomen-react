@@ -1,11 +1,11 @@
 "use client"
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { Toaster, toast } from 'react-hot-toast';
 import Link from 'next/link';
 
 export default function Login() {
-    const router = useRouter();
+    // const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +29,7 @@ export default function Login() {
                 localStorage.setItem('token', data.token);
                 toast.success('Login successful!');
                 setTimeout(() => {
-                    router.push('/'); 
+                    window.location.href = '/'
                 }, 2500);
             } else {
                 toast.error(data.msg || 'Login failed. Please try again.');

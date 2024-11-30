@@ -103,12 +103,23 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
         <div className="flex flex-wrap lg:flex-nowrap space-x-6">
           {/* Product Images */}
           <div className="w-full lg:w-1/2">
-            <ProductImages images={product.ProductImages} />
+            <ProductImages images={product.ProductImages.map(image => ({
+              productImageOne: image.productImageOne,
+              productImageTwo: image.productImageTwo,
+              // Add default values for missing images
+              productImageThree: '',
+              productImageFour: '',
+              productImageFive: '',
+              productImageSix: ''
+            }))} />
           </div>
 
           {/* Product Details */}
           <div className="w-full lg:w-1/2 space-y-6">
             <ProductDetails
+              id={product.id}
+              productImage={product.ProductImages[0].productImageOne}
+              uuid={product.ProductImages[0].uuid}
               name={product.productName}
               price={product.currentPrice}
               description={product.description}
@@ -118,7 +129,7 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
 
             {/* Add to Cart and Wishlist Buttons */}
             <div className="flex space-x-4">
-              {/* <button
+              <button
                 onClick={addToCart}
                 className={`px-6 py-2 rounded-lg transition-colors duration-300 ${
                   isInCart 
@@ -127,7 +138,7 @@ const ProductDetailsPage: React.FC = (): JSX.Element => {
                 }`}
               >
                 {isInCart ? 'In Cart' : 'Add to Cart'}
-              </button> */}
+              </button>
             </div>
 
             <ProductStoreOwner

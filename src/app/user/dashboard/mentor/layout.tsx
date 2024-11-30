@@ -2,15 +2,12 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { HomeIcon, UserIcon, PackageIcon, PlusCircleIcon, UsersIcon, LogOut } from 'lucide-react'
+import { HomeIcon, UserIcon, LogOut } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 const navigation = [
-  { name: 'Dashboard', href: '/user/dashboard/vendor', icon: HomeIcon },
-  { name: 'My Profile', href: '/user/dashboard/vendor/profile', icon: UserIcon },
-  { name: 'Products', href: '/user/dashboard/vendor/products', icon: PackageIcon },
-  { name: 'Create a product', href: '/user/dashboard/vendor/products/create', icon: PlusCircleIcon },
-  { name: 'Customers', href: '/user/dashboard/vendor/customers', icon: UsersIcon },
+  { name: 'Dashboard', href: '/user/dashboard/mentor', icon: HomeIcon },
+  { name: 'My Profile', href: '/user/dashboard/mentor/profile', icon: UserIcon },
 ]
 
 export default function VendorLayout({
@@ -30,7 +27,7 @@ export default function VendorLayout({
     <div className="min-h-screen bg-gray-50">
       <div className="flex min-h-screen">
         {/* Sidebar */}
-        <div className="w-64 bg-white border-r">
+        <div className="w-64 bg-blue-500 border-r">
           <div className="flex flex-col h-full">
             <div className="flex-1 py-6 overflow-y-auto">
               <nav className="px-4 space-y-2">
@@ -43,7 +40,7 @@ export default function VendorLayout({
                       className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg ${
                         isActive
                           ? 'bg-blue-50 text-blue-600'
-                          : 'text-gray-600 hover:bg-gray-50'
+                          : 'text-gray-100 hover:bg-gray-50 hover:text-blue-500'
                       }`}
                     >
                       <item.icon className="w-5 h-5 mr-3" />

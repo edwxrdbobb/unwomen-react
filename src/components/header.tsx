@@ -78,6 +78,11 @@ export default function Component() {
               {renderProfileImage()}
               <span className="ml-2 text-blue-800 font-bold">{user.name} - Dashboard</span>
             </a>
+          ) : user.role === 'Mentor' ? (
+            <a href="/user/dashboard/mentor" className="text-gray-600 text-xs flex items-center">
+              {renderProfileImage()}
+              <span className="ml-2 text-blue-800 font-bold">{user.name} - Dashboard</span>
+            </a>
           ) : (
             <a href="/user/profile" className="text-gray-600 text-xs flex items-center">
               {renderProfileImage()}
@@ -132,9 +137,9 @@ export default function Component() {
           <a href="/products/shop" className="text-gray-600 text-xs">
             Store
           </a>
-          {!loading && user && user.role === 'Vendor' && (
+          {!loading && user && user.role === 'Mentor' && (
             <a href="/mentors" className="text-gray-600 text-xs">
-              Mentor
+              Vendor
             </a>
           )}
           {renderAuthLinks()}
