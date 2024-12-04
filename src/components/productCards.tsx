@@ -152,24 +152,21 @@ export default function ProductCard({ size = 3 }: ProductCardProps) {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
+ <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-16">
         {currentProducts.map((product) => (
           <Link key={product.id} href={`/products/${product.uuid}`} passHref>
-            <div className="backdrop-blur-sm bg-white/30 rounded-lg overflow-hidden shadow-sm 
-              hover:bg-white hover:shadow-lg transition-all duration-300 h-[250px] relative
-              group">
-              <div className="action-overlay absolute bg-black-1/2 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                style={{top: 5, right: 5}}>
+            <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow relative group">
+              <div className="action-overlay absolute right-6 top-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                 <button
                   onClick={(e) => addToCart(product, e)}
-                  className="bg-white text-yellow-400 shadow-sm hover:text-black hover:bg-yellow-300 text-white mr-2 p-2 rounded-full transition-colors duration-300"
+                  className="bg-white shadow-sm hover:bg-yellow-300 p-2 rounded-full transition-colors duration-300 mr-2"
                   aria-label="Add to cart"
                 >
                   <ShoppingCart className="w-5 h-5" />
                 </button>
                 <button
                   onClick={(e) => addToWishlist(product, e)}
-                  className="bg-white text-yellow-400 shadow-sm hover:text-black hover:bg-yellow-300 text-white p-2 rounded-full transition-colors duration-300"
+                  className="bg-white shadow-sm hover:bg-yellow-300 p-2 rounded-full transition-colors duration-300"
                   aria-label="Add to wishlist"
                 >
                   <Heart className="w-5 h-5" />
@@ -182,31 +179,21 @@ export default function ProductCard({ size = 3 }: ProductCardProps) {
                     : "/placeholder.svg"
                 }
                 alt={product.productName}
-                className="w-full h-[135px] bg-gray-300 object-cover"
+                className="w-full h-[200px] mb-4 object-cover rounded-lg"
               />
-              <div className="p-4" style={{lineHeight: 1}}>
-                <h3 className="text-sm text-gray-800 truncate">{product.productName}</h3>
-                <div className="flex items-center justify-between" style={{margin: '5px 0'}}>
-                  <div>
-                    <span className="text-md font-bold text-gray-700">Le {product.currentPrice.toFixed(2)}</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <div className="flex items-center">
-                    <span className="text-indigo-400 text-xs">{product.productLocation}</span>
-                  </div>
-                  {/* Replace the nested Link with a span or div */}
-                  <span 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push(`/products/shop/category/${product.category}`);
-                    }}
-                    className="bg-yellow-100 p-1 rounded-full cursor-pointer" 
-                    style={{fontSize: 10}}
-                  >
-                    {product.category}
-                  </span>
-                </div>
+              <h3 className="font-semibold mb-2 truncate text-gray-800">{product.productName}</h3>
+              <p className="text-green-600 font-bold">Le {product.currentPrice.toFixed(2)}</p>
+              <div className="flex justify-between items-center mt-2">
+                <span className="text-sm text-gray-500">{product.productLocation}</span>
+                <span 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push(`/products/shop/category/${product.category}`);
+                  }}
+                  className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full cursor-pointer"
+                >
+                  {product.category}
+                </span>
               </div>
             </div>
           </Link>

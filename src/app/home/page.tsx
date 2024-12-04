@@ -14,7 +14,7 @@ export default function HomeScreen() {
   return (
     <div className="min-h-screen bg-gray-50 my-4">
       {/* Slider Banner Section */}
-      <ImageSlider images={images} />
+      <ImageSlider images={images as unknown as string[]} />
 
       {/* Business Category Section */}
       <BusinessCategory />
