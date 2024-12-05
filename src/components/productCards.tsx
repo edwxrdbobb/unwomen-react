@@ -46,7 +46,7 @@ interface WishlistItem {
   image: string;
 }
 
-export default function ProductCard({ size = 3 }: ProductCardProps) {
+export default function ProductCard({}: ProductCardProps) {
   const router = useRouter()
   const [products, setProducts] = useState<Product[]>([])
   const [currentPage, setCurrentPage] = useState(1)

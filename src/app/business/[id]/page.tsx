@@ -13,6 +13,10 @@ interface Business {
   businessAddress: string;
   businessBiography: string;
   businessLogo: string;
+  user: {
+    url: string;
+    name: string;
+  }; // Add the user property
   // Add other properties as necessary
 }
 

@@ -9,11 +9,10 @@ import ProductCardCategory from "@/components/ProductCardsCategory";
 type Action = "category" | "business" | "default";
 
 // Define the props for the Shop component
-interface ShopProps extends PageProps {
+interface ShopProps {
   action: Action;
   category: string | string[];
   size?: number;
-  params?: Record<string, any>; // Include additional fields as necessary
 }
 
 // Define a simpler structure for ShopProps during type validation
